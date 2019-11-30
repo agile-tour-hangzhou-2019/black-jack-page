@@ -25,8 +25,15 @@ Then(`I can see {string} button`, (text) => {
     cy.get('button').contains(text).should('exist');
 })
 
-Then(`I can see cards {string}`, (text) => {
-    cy.get('.card').should( ($card) => {
+Then(`I can see banker cards {string}`, (text) => {
+    cy.get('#banker').find('.card').should( ($card) => {
        expect($card.text()).to.deep.eq(text);
     });
 })
+Then(`I can see player cards {string}`, (text) => {
+    cy.get('#player').find('.card').should( ($card) => {
+       expect($card.text()).to.deep.eq(text);
+    });
+})
+
+

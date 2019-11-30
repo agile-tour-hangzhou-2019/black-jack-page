@@ -2,7 +2,8 @@
     <div>
         <h1> Start Play Black Jack </h1>
         <button v-on:click='getCards'>Start</button>
-        <p><Card  v-for="card in cards" :key='card' :code='card'/></p>
+        <p id="banker"><Card  v-for="card in bankercards" :key='card' :code='card'/></p>
+        <p id="player"><Card  v-for="card in playercards" :key='card' :code='card'/></p>
     </div>
 </template>
 
@@ -16,13 +17,17 @@ export default {
     },
     data () {
         return {
-            cards: ''
+            bankercards: [],
+            playercards: []
+            
         }
     },
     methods: {
         getCards () {
-            this.$http.get(CARD).then(response => {
-                this.cards = response.data
+            this.$http.get("startgame").then(response => {
+                this.bankercards = response.data[0].cards;
+                this.playercards = response.data[1].cards
+
             }, error => {
                 error
             });
